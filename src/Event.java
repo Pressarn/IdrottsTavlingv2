@@ -8,11 +8,19 @@ public class Event {
     private String eventName;
     private int attemptsAllowed;
     private boolean biggerBetter;
+    private Result result;
 
     public Event(String eventName, int attemptsAllowed, boolean biggerBetter) {
         this.eventName = eventName;
         this.attemptsAllowed = attemptsAllowed;
         this.biggerBetter = biggerBetter;
+    }
+
+    public Event(String eventName, int attemptsAllowed, boolean biggerBetter, Result result) {
+        this.eventName = eventName;
+        this.attemptsAllowed = attemptsAllowed;
+        this.biggerBetter = biggerBetter;
+        this.result = result;
     }
 
     public String getEventName() {
@@ -27,11 +35,13 @@ public class Event {
         return biggerBetter;
     }
 
+    public Result getResult(){
+        return result;
+    }
+
     public String toString(){
         return attemptsAllowed + "";
     }
 
 
 }
-
-

@@ -1,18 +1,42 @@
-Programmeringsstilen är sådär. Den här kursen har inte lika hårda krav på stil som OOP hade, helt enkelt för att ni förväntas kunna det nu. Saker jag sett är:
+Programmeringsstilen är sådär. Den här kursen har inte lika hårda krav på stil som OOP
+hade, helt enkelt för att ni förväntas kunna det nu. Saker jag sett är:
 * Dåliga namn: marked, marked2?
 * Alltför låga skyddsnivåer. Allt som kan vara private ska normalt vara det...
 * Blandat svenska och engelska.
 
-Operatorn instanceof är nödvändig i några få situationer, till exempel equals-metoden, men bör i övrigt inte användas. Arv och polymorfism kan ofta användas istället för att få en robustare och enklare lösning.
+Operatorn instanceof är nödvändig i några få situationer, till exempel equals-metoden,
+men bör i övrigt inte användas. Arv och polymorfism kan ofta användas istället för att
+få en robustare och enklare lösning.
 
-Kategorierna skulle kunna hanteras bättre med en enum eller en klass. Som det är nu måste du kontrollera vilken typ det är istället för att kunna förlita dig på att kategoriobjekten själva vet vad de är och vilka attribut de har. Detta är inget du måste åtgärda, men det är rekommenderat att du gör det.
+Kategorierna skulle kunna hanteras bättre med en enum eller en klass. Som det är nu
+måste du kontrollera vilken typ det är istället för att kunna förlita dig på att
+kategoriobjekten själva vet vad de är och vilka attribut de har. Detta är inget du måste
+åtgärda, men det är rekommenderat att du gör det.
 
 Positionsklassen är inte förberedd för att användas som nyckel i en hash-tabell.
 
-Uppgiften säger: ''För varje sökning eller annan operation bör du tänka igenom om operationen skulle underlättas med någon speciell datastruktur och i så fall använda denna datastruktur.'' Minst en av de grundläggande funktionerna i ditt program uppfyller inte detta krav utan går i onödan igenom platser och letar efter de som uppfyller kriterierna istället för att använda en lämplig datastruktur för att samla de relevanta platserna.
+Uppgiften säger: ''För varje sökning eller annan operation bör du tänka igenom om
+operationen skulle underlättas med någon speciell datastruktur och i så fall använda denna
+datastruktur.'' Minst en av de grundläggande funktionerna i ditt program uppfyller inte
+detta krav utan går i onödan igenom platser och letar efter de som uppfyller kriterierna
+istället för att använda en lämplig datastruktur för att samla de relevanta platserna.
 
-Ovanstående problem kommer att kräva att du skriver om delar av din kod. När man gör det finns alltid en risk att man introducerar nya buggar i systemet. Eftersom vi därför kommer att behöva gå igenom all funktionalitet på nytt nästa gång du lämnar in så har vi bara gjort en snabb genomgång av funktionerna i ditt program för att fånga uppenbara buggar. Det som sägs om funktionaliteten nedan behöver alltså inte vara allt som finns att säga, och du bör vara noga med att gå igenom alla funktioner inför nästa rättningsomgång.
+Ovanstående problem kommer att kräva att du skriver om delar av din kod. När man gör det
+finns alltid en risk att man introducerar nya buggar i systemet. Eftersom vi därför kommer
+att behöva gå igenom all funktionalitet på nytt nästa gång du lämnar in så har vi bara
+gjort en snabb genomgång av funktionerna i ditt program för att fånga uppenbara buggar.
+Det som sägs om funktionaliteten nedan behöver alltså inte vara allt som finns att säga,
+och du bör vara noga med att gå igenom alla funktioner inför nästa rättningsomgång.
 
 Programmet startar inte när jag försöker köra jar-filen.
 
-Ett problem tidigare år har varit att ge tillräckligt exakt feedback på när programmet inte fungerar som det ska. Det kommer alltid ett antal mejl som säger något i stil med "Men det fungerar för oss!" och det kan då vara svårt att återskapa precis den sekvens av input som ledde till det felaktiga beteendet. I år har vi därför gjort ett försök med att spela in testkörningen av programmet så att ni kan följa med i precis vad vi gjorde när vi körde programmet. Inspelningen finns på https://www2.dsv.su.se/prog2video/ och är kopplad till användarnamnet på den person i gruppen som skickade in. Inspelningarna kommer att ligga kvar där åtminstone i några veckor, men de tar upp mycket plats, så om ni vill ha kvar dem längre, eller ge alla i gruppen tillgång till dem, så får ni ladda ner dem innan de plockas bort.
+Ett problem tidigare år har varit att ge tillräckligt exakt feedback på när programmet
+inte fungerar som det ska. Det kommer alltid ett antal mejl som säger något i stil med
+"Men det fungerar för oss!" och det kan då vara svårt att återskapa precis den sekvens
+av input som ledde till det felaktiga beteendet. I år har vi därför gjort ett försök med
+att spela in testkörningen av programmet så att ni kan följa med i precis vad vi gjorde
+när vi körde programmet. Inspelningen finns på https://www2.dsv.su.se/prog2video/ och är
+kopplad till användarnamnet på den person i gruppen som skickade in. Inspelningarna kommer
+att ligga kvar där åtminstone i några veckor, men de tar upp mycket plats, så om ni vill ha
+kvar dem längre, eller ge alla i gruppen tillgång till dem, så får ni ladda ner dem innan
+de plockas bort.

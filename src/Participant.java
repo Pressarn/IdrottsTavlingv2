@@ -1,9 +1,5 @@
-/**
- * Created by SimonSchwieler on 2016-04-07.
- */
-
-//rodi0231_sisc7379_arho2993
 import java.util.ArrayList;
+import java.util.List;
 
 public class Participant {
 
@@ -17,7 +13,7 @@ public class Participant {
 
 
 
-    public Participant(String firstName, String lastName, String teamName, int id) {
+    public Participant(String firstName, String lastName, String teamName) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.teamName = teamName;
@@ -103,16 +99,16 @@ public class Participant {
         return gatheredResults;
     }
 
-    public ArrayList<ResultList> getResultListByEvent(Event event) {
+    public List<ResultList> getResultListByEvent(Event event) {
 
-        ArrayList<ResultList> gatheredEvents = new ArrayList<>();
+        List<ResultList> gatheredEvents = new ArrayList<>();
 
-            for (ResultList rl : results) {
+        for (ResultList rl : results) {
 
-                if ((event.getEventName().equalsIgnoreCase(rl.getEvent().getEventName()))) {
-                    gatheredEvents.add(rl);
-                }
+            if ((event.getEventName().equalsIgnoreCase(rl.getEvent().getEventName()))) {
+                gatheredEvents.add(rl);
             }
+        }
 
         return gatheredEvents;
     }

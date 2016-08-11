@@ -30,10 +30,12 @@ public class Result {
         return result;
     }
 
+    public Event getEvent(){
+        return event;
+    }
+
     public String toString(){
         return result + "";
     }
 
 }
-
-

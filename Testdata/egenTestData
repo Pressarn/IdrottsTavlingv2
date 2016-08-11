@@ -1,0 +1,36 @@
+add participant
+rob
+rob
+rob
+add participant
+sim
+sim
+sim
+add event
+fotboll
+2
+n
+add event
+hockey
+2
+y
+add result
+100
+fotboll
+4
+teams
+add result
+101
+fotboll
+3
+teams
+add result
+100
+hockey
+2
+teams
+add result
+101
+hockey
+3
+teams
