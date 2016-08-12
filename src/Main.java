@@ -95,12 +95,9 @@ public class Main {
                 case "exit":
                     exit();
                     break;
-                case "test":
-                        printOutEvents2();
-                    break;
                 default:
                     System.out.println("Wrong command: " + command);
-                 //   writeMenu();
+
             }
         }
     }
@@ -300,7 +297,8 @@ public class Main {
                             resultString += ", ";
                         }
                     }
-                    allResults += "Results for " + p.getFirstName() + " " + p.getLastName() + " in " + e.getEventName() + ": " + resultString + "\n";
+                    allResults += "Results for " + p.getFirstName() + " "
+                            + p.getLastName() + " in " + e.getEventName() + ": " + resultString + "\n";
                 }
             }
             if (allResults.length() == 0){
@@ -317,61 +315,17 @@ public class Main {
     }
 
 
-    static class TopListPosition implements Comparable<TopListPosition> {
-        public final String name;
-        public final double score;
-        public final Event event;
-
-
-
-        public TopListPosition(String name, double score, Event event) {
-            this.name = name;
-            this.score = score;
-            this.event = event;
-        }
-
-        @Override
-        public int compareTo(TopListPosition o) {
-            return 0;
-        }
-
-        public static class ScoreComparator implements Comparator<TopListPosition>{
-            public int compare(TopListPosition t1, TopListPosition t2){
-
-
-
-                    if (t1.score == t2.score)
-                        return 0;
-                    else if (t1.score > t2.score)
-                        return 1;
-                    else
-                        return -1;
-
-
-
-   //             return (int) (t1.score - t2.score);
-
-            }
-        }
-        public String toString(){
-            return name + " " + event.getEventName() + " " + score + " ";
-        }
-
-    }
-
 
 
     private void resultEvent(String command) {
 
 
+        List<TopListPosition> topList = new ArrayList<>();
+
         String event = command;
         Event e = getEvent(event);
-
-        List<TopListPosition> topList = new ArrayList<>();
-        double participantsBestResult = 0.0;
-        String name = null;
-
-
+        double participantsBestResult;
+        String name;
 
         if (participantArrayList.isEmpty() || resultArrayList.isEmpty()){
             System.out.println("No event with that name or no results found.");
@@ -384,37 +338,25 @@ public class Main {
 
 
         for (Participant participant : this.participantArrayList) {
-            ArrayList<ResultList> participantsResults = participant.getResultListByEvent(e);
 
-
-
-                participantsBestResult = participant.getBestResult(e);
+                participantsBestResult = participant.getBestResultBiggerBetterTrue(e);
                 name = participant.getFirstName() + " " + participant.getLastName();
-
-
-
 
                 topList.add(new TopListPosition(name, participantsBestResult, e));
 
-
             }
 
-
-
         }
-
-
-
 
         Collections.sort(topList, new Comparator<TopListPosition>() {
                     public int compare(TopListPosition obj1, TopListPosition obj2) {
                         if (e.getBiggerBetter())
-                            return (int) (obj2.score - obj1.score);
-                        else if(obj2.score == obj1.score){
+                            return (int) (obj2.getScore() - obj1.getScore());
+                        else if(obj2.getScore() == obj1.getScore()){
                             return 0;
                         }
                         else
-                            return (int) (obj1.score - obj2.score);
+                            return (int) (obj1.getScore() - obj2.getScore());
                     }
                 }
         );
@@ -423,47 +365,26 @@ public class Main {
         for (int i = 0; i < topList.size(); i++) {
             TopListPosition currentPosition = topList.get(i);
             if (previousPosition != null) {
-                if(currentPosition.score != previousPosition.score){
+                if(currentPosition.getScore() != previousPosition.getScore()){
                     placement = i;
                     placement++;
                 }
             }
             previousPosition = currentPosition;
 
-            if(currentPosition.score > 0) {
+            if(currentPosition.getScore() > 0) {
 
-                System.out.println((placement) + " " + currentPosition.score + " " + currentPosition.name);
+                System.out.println((placement) + " " + currentPosition.getScore() + " " + currentPosition.getName());
             }
 
         }
 
-    }
-
-
-    private void printOutEvents(Event e){
-
-        ArrayList<TopListPosition> tpl = new ArrayList<>();
-
-        for(ResultList rl : resultListArrayList){
-            if(rl.getEvent().equals(e)){
-                tpl.add(new TopListPosition(rl.getParticipant().getFirstName(), rl.getParticipant().getBestResult(e), e));
-
-
-            }
-        }
-        System.out.print(tpl);
-    }
-
-    private void printOutEvents2(){
-        String eventName = keyboard.nextLine();
-        Event e = getEvent(eventName);
-        printOutEvents(e);
     }
 
     private Integer getPosition(Participant p,  final Event event) {
 
 
-        List<TopListPosition> topList2 = new ArrayList<>();
+        List<TopListPosition> topListForTeams = new ArrayList<>();
 
         String participantName = null;
         Double participantResult = 0.0;
@@ -473,68 +394,50 @@ public class Main {
 
         for (Participant participant : this.participantArrayList) {
             for (ResultList resultList : participant.getResults()) {
-          //      if (resultList.getEvent().getEventName().equalsIgnoreCase(event.getEventName())) {
-         //       if(resultList.getEvent() == event){
-
 
                     if(event.getBiggerBetter()) {
 
                          participantName = resultList.getParticipant().getFirstName() + " " + resultList.getParticipant().getLastName();
-                        participantResult = resultList.getParticipant().getBestResult(event);
+                            participantResult = resultList.getParticipant().getBestResultBiggerBetterTrue(event);
 
-//                        topList2.add(new TopListPosition(resultList.getParticipant().getFirstName()
-//                                + " " + resultList.getParticipant().getLastName(), resultList.getParticipant().getBestResult(event), event));
 
                     }
                     else if (!event.getBiggerBetter()){
 
                         participantName = resultList.getParticipant().getFirstName() + " " + resultList.getParticipant().getLastName();
-                        participantResult = resultList.getParticipant().getBestResultForSmallerBetter(event);
+                            participantResult = resultList.getParticipant().getBestResultBiggerBetterFalse(event);
 
-//                        topList2.add(new TopListPosition(resultList.getParticipant().getFirstName()
-//                                + " " + resultList.getParticipant().getLastName(), resultList.getParticipant().getBestResultForSmallerBetter(event), event));
+
                     }
 
-
-
-
-//                    topList2.add(new TopListPosition(participant.getFirstName() + " " + participant.getLastName(),
-//                            resultList.getResultFromList().getResult(),
-//                            resultList.getEvent()));
-
-
-
-                topList2.add(new TopListPosition(participantName, participantResult, participantEvent));
-                break;
-
-
+                if (participantResult >= 0) {
+                    topListForTeams.add(new TopListPosition(participantName, participantResult, participantEvent));
+                    break;
+                }
             }
-
-
         }
 
-
         if (event.getBiggerBetter()){
-            Collections.sort(topList2,Collections.reverseOrder(new TopListPosition.ScoreComparator()));
+            Collections.sort(topListForTeams,Collections.reverseOrder(new TopListPosition.scoreComparator()));
 
         }
         else if (!event.getBiggerBetter()){
-            Collections.sort(topList2, new TopListPosition.ScoreComparator());
+            Collections.sort(topListForTeams, new TopListPosition.scoreComparator());
 
         }
 
         try {
 
-            double firstPlace = topList2.get(0).score;
+            double firstPlace = topListForTeams.get(0).getScore();
             double secondPlace = 0;
             double thirdPlace = 0;
 
-            for (TopListPosition topListPosition : topList2) {
-                double score = topListPosition.score;
+            for (TopListPosition topListPosition : topListForTeams) {
+                double score = topListPosition.getScore();
+
+
 
                 if(event.getBiggerBetter()) {
-
-
 
                     if (score >= firstPlace) {
                         event.awardMedal();
@@ -558,79 +461,28 @@ public class Main {
                     } else if ((score <= thirdPlace || thirdPlace == 0) && event.ammountOfMedalsAwarded() < 3 ){
                         thirdPlace = score;
                     }
-
                 }
-
             }
 
             event.resetMedals();
 
-            for (TopListPosition topListPosition : topList2) {
+            for (TopListPosition topListPosition : topListForTeams) {
 
-                if (topListPosition.name.equals(p.getFirstName() + " " + p.getLastName()) && topListPosition.event.equals(event)) {
-                    double score = topListPosition.score;
+                if (topListPosition.getName().equals(p.getFirstName() + " " + p.getLastName()) && topListPosition.getEvent().equals(event)) {
+                    double score = topListPosition.getScore();
                     if (firstPlace == score) {
-
                         return 1;
-
                     } else if (secondPlace == score) {
-
                         return 2;
                     } else if (thirdPlace == score) {
-
                         return 3;
                     }
                 }
             }
-        }catch(Exception e){
 
-        }
-
+        }catch(Exception e){}
         return null;
     }
-
-//    private Integer getPosition(Participant p,  Event event) {
-//        List<TopListPosition> topListPos = new ArrayList<>();
-//        for (Participant participant : this.participantArrayList) {
-//            double bestResult = 0.0;
-//            for (ResultList resultList : participant.getResults()) {
-//
-//                if (resultList.getEvent().getEventName().equalsIgnoreCase(event.getEventName())) {
-//
-//                    bestResult = participant.getBestResult(event);
-//
-//                }
-//
-//            }
-//            topListPos.add(new TopListPosition(participant.getFirstName() + " " + participant.getLastName(), bestResult, event));
-//        }
-//        Collections.sort(topListPos, new Comparator<TopListPosition>() {
-//            public int compare(TopListPosition obj1, TopListPosition obj2) {
-//
-//                if (event.getBiggerBetter() && obj1.score != obj2.score) {
-//                    return (int) (obj2.score - obj1.score);
-//                }
-//                else if (!event.getBiggerBetter() && obj1.score != obj2.score) {
-//                    return (int) (obj1.score - obj2.score);
-//                }
-//                else {
-//                    return 0;
-//                }
-//
-//            }
-//        });
-//        int i = 1;
-//
-//        for (TopListPosition tlp : topListPos) {
-//            if (tlp.name.equals(p.getFirstName() + " " + p.getLastName())) {
-//                return i;
-//            }
-//            ++i;
-//        }
-//        return null;
-//
-//    }
-
 
 
     private static class TeamMedals {
@@ -657,8 +509,6 @@ public class Main {
 
     private void resultTeam() {
 
-
-
         if (participantArrayList.isEmpty()) {
             System.out.println("No teams available.");
 
@@ -675,24 +525,19 @@ public class Main {
                             teams.put(participant.getTeamName(), teamMedals);
                         }
 
-
                         if (position == 1) {
-
                             teamMedals.firstPlace++;
 
                         } else if (position == 2) {
-
                             teamMedals.secondPlace++;
 
                         } else if (position == 3) {
-
                             teamMedals.thirdPlace++;
                         }
                     }
-
                     }
-
                 }
+
                 List<TeamResult> teamResults = new ArrayList<>();
                 for (Entry<String, TeamMedals> entry : teams.entrySet()) {
                     teamResults.add(new TeamResult(entry.getValue(), entry.getKey()));
@@ -710,7 +555,8 @@ public class Main {
                         return obj2.teamMedals.thirdPlace - obj1.teamMedals.thirdPlace;
                     }
                 });
-                System.out.println("1st    2nd     3rd    Team name");
+                System.out.println("");
+                System.out.println("1st    2nd    3rd    Team name");
                 System.out.println("*******************************");
                 for (TeamResult teamResult : teamResults) {
                     System.out.println(teamResult.teamMedals.firstPlace + "      " +
@@ -718,16 +564,13 @@ public class Main {
                             teamResult.teamMedals.thirdPlace + "      " +
                             teamResult.team);
 
-
                 }
                 teamResults.clear();
-
         }
 
         for (Event e : eventArrayList){
             e.resetMedals();
         }
-
     }
 
 
@@ -737,7 +580,6 @@ public class Main {
 
         if (message.length() > 56) {
             message = message.substring(0, 56);
-
         }
 
         char fill = ' ';

@@ -10,10 +10,7 @@ public class Result {
     private Participant participant;
     private Event event;
 
-    public Result(double result) {
 
-        this.result = result;
-    }
     public Result (double result, Participant participant, Event event){
         this.result = result;
         this.participant = participant;
@@ -24,6 +21,10 @@ public class Result {
     public void setResult(double newResult) {
         result = newResult;
 
+    }
+
+    public Participant getParticipant(){
+        return participant;
     }
 
     public double getResult(){

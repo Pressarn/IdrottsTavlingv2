@@ -3,6 +3,8 @@
  */
 
 //rodi0231_sisc7379_arho2993
+
+
 import java.util.ArrayList;
 
 public class Participant {
@@ -13,9 +15,7 @@ public class Participant {
     private String lastName;
     private String teamName;
     private int id;
-    private ArrayList<ResultList> results = new ArrayList<ResultList>();
-
-
+    private ArrayList<ResultList> results = new ArrayList<>();
 
     public Participant(String firstName, String lastName, String teamName, int id) {
         this.firstName = firstName;
@@ -23,28 +23,17 @@ public class Participant {
         this.teamName = teamName;
         this.id = ++Participant.next_id;
     }
+
     public String getFirstName() {
         return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
     }
 
     public String getLastName() {
         return lastName;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
     public String getTeamName() {
         return teamName;
-    }
-
-    public void setTeamName(String teamName) {
-        this.teamName = teamName;
     }
 
     public int getId() {
@@ -55,41 +44,14 @@ public class Participant {
         next_id = 99;
     }
 
-    public void setResult(Event e, double score){
+    public void setResultToList(Event event, Result result, Participant participant){
 
-        ArrayList<ResultList> tmpList = this.getResults();
-
-        Result r = new Result(score);
-
-        ResultList rl = new ResultList(e,r);
-
-        tmpList.add(rl);
-
-        this.setResults(tmpList);
-    }
-
-
-    public void setResult2(Event e, Result result){
-
-        ArrayList<ResultList> tmpList = this.getResults();
-
-        Result r = new Result(result.getResult());
-
-        ResultList rl = new ResultList(e,r);
-
-        tmpList.add(rl);
-
-        this.setResults(tmpList);
-    }
-
-    public void setResultToList(Event event, Result result){
-
-        results.add(new ResultList(event, result));
+        results.add(new ResultList(event, result, participant));
 
 
     }
 
-    public Double getBestResult(Event event) {
+    public Double getBestResultBiggerBetterTrue(Event event) {
 
         if (!getResultsByEvent(event).isEmpty()) {
 
@@ -107,6 +69,27 @@ public class Participant {
         }
     }
 
+    public Double getBestResultBiggerBetterFalse(Event event){
+        {
+
+            if (!getResultsByEvent(event).isEmpty()) {
+
+                double min = Double.MAX_VALUE;
+                for (int i = 0; i < results.size(); i++) {
+                    if (results.get(i).getEvent().equals(event) && results.get(i).getResultFromList().getResult() < min) {
+                        min = results.get(i).getResultFromList().getResult();
+                    }
+                }
+                return min;
+
+            }
+            else{
+                return -1.0;
+            }
+        }
+
+    }
+
     public ArrayList<Double> getResultsByEvent(Event event){
 
         ArrayList<Double> gatheredResults = new ArrayList<>();
@@ -119,28 +102,6 @@ public class Participant {
         }
 
         return gatheredResults;
-    }
-
-    public ArrayList<ResultList> getResultListByEvent(Event event) {
-
-        ArrayList<ResultList> gatheredEvents = new ArrayList<>();
-
-            if(results.isEmpty()){
-                return gatheredEvents;
-            }
-
-            for (ResultList rl : results) {
-
-                if ((event.getEventName().equalsIgnoreCase(rl.getEvent().getEventName()))) {
-                    gatheredEvents.add(rl);
-                }
-            }
-
-        return gatheredEvents;
-    }
-
-    public void countDownAttempts(Event e){
-
     }
 
     public String toString(){
@@ -157,15 +118,8 @@ public class Participant {
         return counter;
     }
 
-
-
     public ArrayList<ResultList> getResults() {
         return results;
     }
-    public void setResults(ArrayList<ResultList> results) {
-        this.results = results;
-    }
-
-
 
 }

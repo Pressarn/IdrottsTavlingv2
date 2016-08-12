@@ -8,6 +8,7 @@ public class Event {
     private String eventName;
     private int attemptsAllowed;
     private boolean biggerBetter;
+    private int medal = 0;
 
     public Event(String eventName, int attemptsAllowed, boolean biggerBetter) {
         this.eventName = eventName;
@@ -27,8 +28,20 @@ public class Event {
         return biggerBetter;
     }
 
+    public int ammountOfMedalsAwarded(){
+        return medal;
+    }
+
+    public void awardMedal(){
+        ++medal;
+    }
+
+    public void resetMedals(){
+        medal = 0;
+    }
+
     public String toString(){
-        return attemptsAllowed + "";
+        return eventName + "";
     }
 
 
