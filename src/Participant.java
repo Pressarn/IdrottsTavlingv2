@@ -15,7 +15,7 @@ public class Participant {
     private String lastName;
     private String teamName;
     private int id;
-    private ArrayList<ResultList> results = new ArrayList<>();
+    private ArrayList<ResultHandler> results = new ArrayList<>();
 
     public Participant(String firstName, String lastName, String teamName, int id) {
         this.firstName = firstName;
@@ -46,7 +46,7 @@ public class Participant {
 
     public void setResultToList(Event event, Result result, Participant participant){
 
-        results.add(new ResultList(event, result, participant));
+        results.add(new ResultHandler(event, result, participant));
 
 
     }
@@ -93,7 +93,7 @@ public class Participant {
     public ArrayList<Double> getResultsByEvent(Event event){
 
         ArrayList<Double> gatheredResults = new ArrayList<>();
-        for (ResultList r : results){
+        for (ResultHandler r : results){
             if(event.getEventName().equalsIgnoreCase(r.getEvent().getEventName())) {
                 gatheredResults.add(r.getResultFromList().getResult());
 
@@ -110,7 +110,7 @@ public class Participant {
 
     public int getAmountOfAttempts (Event e){
         int counter = 0;
-        for(ResultList r : results){
+        for(ResultHandler r : results){
             if (e.getEventName().equalsIgnoreCase(r.getEvent().getEventName())){
                 counter++;
             }
@@ -118,7 +118,7 @@ public class Participant {
         return counter;
     }
 
-    public ArrayList<ResultList> getResults() {
+    public ArrayList<ResultHandler> getResults() {
         return results;
     }
 

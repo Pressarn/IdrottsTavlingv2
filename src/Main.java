@@ -9,10 +9,10 @@ import java.util.Map.Entry;
 public class Main {
 
     private Scanner keyboard = new Scanner(System.in);
-    ArrayList<Event> eventArrayList = new ArrayList<>();
-    ArrayList<Result> resultArrayList = new ArrayList<>();
-    ArrayList<Participant> participantArrayList = new ArrayList<>();
-    ArrayList<ResultList> resultListArrayList = new ArrayList<>();
+    private ArrayList<Event> eventArrayList = new ArrayList<>();
+    private ArrayList<Result> resultArrayList = new ArrayList<>();
+    private ArrayList<Participant> participantArrayList = new ArrayList<>();
+    private ArrayList<ResultHandler> resultListArrayHandler = new ArrayList<>();
     private int id = 99;
 
 
@@ -35,15 +35,15 @@ public class Main {
         return number;
     }
 
-    private String readCommand() {
+    public String readCommand() {
         return readString("Command: ").toLowerCase();
     }
 
-    private void initiate() {
+    public void initiate() {
         System.out.println("Welcome");
     }
 
-    private void writeMenu() {
+    public void writeMenu() {
         System.out.println("Following commandos are possible:");
         System.out.println(" Add event");
         System.out.println(" Add participant");
@@ -56,7 +56,7 @@ public class Main {
         System.out.println(" Exit");
     }
 
-    private void manageCommand(String command) {
+    public void manageCommand(String command) {
 
         if (command.matches("message.+")) {
             message(command);
@@ -102,7 +102,7 @@ public class Main {
         }
     }
 
-    private void addEvent() {
+    public void addEvent() {
 
         String eventName = "";
         while (eventName.isEmpty() || getEvent(eventName) != null) {
@@ -267,7 +267,7 @@ public class Main {
             Result r = new Result(result, p, e);
             resultArrayList.add(r);
             p.setResultToList(e, r, p);
-            resultListArrayList.add(new ResultList(e, r, p));
+            resultListArrayHandler.add(new ResultHandler(e, r, p));
 
             System.out.println("Result " + result + " in " + e.getEventName() + " has been registred.");
         }
@@ -393,19 +393,19 @@ public class Main {
 
 
         for (Participant participant : this.participantArrayList) {
-            for (ResultList resultList : participant.getResults()) {
+            for (ResultHandler resultHandler : participant.getResults()) {
 
                     if(event.getBiggerBetter()) {
 
-                         participantName = resultList.getParticipant().getFirstName() + " " + resultList.getParticipant().getLastName();
-                            participantResult = resultList.getParticipant().getBestResultBiggerBetterTrue(event);
+                         participantName = resultHandler.getParticipant().getFirstName() + " " + resultHandler.getParticipant().getLastName();
+                            participantResult = resultHandler.getParticipant().getBestResultBiggerBetterTrue(event);
 
 
                     }
                     else if (!event.getBiggerBetter()){
 
-                        participantName = resultList.getParticipant().getFirstName() + " " + resultList.getParticipant().getLastName();
-                            participantResult = resultList.getParticipant().getBestResultBiggerBetterFalse(event);
+                        participantName = resultHandler.getParticipant().getFirstName() + " " + resultHandler.getParticipant().getLastName();
+                            participantResult = resultHandler.getParticipant().getBestResultBiggerBetterFalse(event);
 
 
                     }
@@ -485,27 +485,9 @@ public class Main {
     }
 
 
-    private static class TeamMedals {
-        public int firstPlace;
-        public int secondPlace;
-        public int thirdPlace;
 
-        public TeamMedals(int fp, int sp, int tp) {
-            this.firstPlace = fp;
-            this.secondPlace = sp;
-            this.thirdPlace = tp;
-        }
-    }
 
-    private static class TeamResult {
-        public final TeamMedals teamMedals;
-        public final String team;
 
-        public TeamResult(TeamMedals teamMedals, String team) {
-            this.teamMedals = teamMedals;
-            this.team = team;
-        }
-    }
 
     private void resultTeam() {
 

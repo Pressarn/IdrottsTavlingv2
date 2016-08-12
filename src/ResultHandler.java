@@ -4,13 +4,13 @@
 
 //rodi0231_sisc7379_arho2993
 
-public class ResultList {
+public class ResultHandler {
 
     private Result result;
     private Event event;
     private Participant participant;
 
-    public ResultList(Event e, Result r, Participant p) {
+    public ResultHandler(Event e, Result r, Participant p) {
         this.event = e;
         this.participant = p;
         this.result = r;

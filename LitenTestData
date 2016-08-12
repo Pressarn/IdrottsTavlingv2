@@ -24,7 +24,6 @@ participant
 101
 long jump
 Marathon
-teams
 message Inmatning av resultat
 message Resultat för Ada i long jump
 add result
@@ -45,7 +44,7 @@ message Resultat för Alan i long jump
 add result
 101
 long jump
-6,5
+6,75
 message Resultat för Ada i long jump
 add result
 100

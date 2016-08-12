@@ -1,0 +1,351 @@
+add event
+long jump
+3
+yes
+add event
+Marathon
+1
+n
+message Lägg till: Ada och Alan från datorhistorien
+add participant
+Ada
+Lovelace
+Computing
+add participant
+Alan
+Turing
+Computing
+message Resultatlistor utan registrerade resultat
+message Resultat för Ada
+participant
+100
+message Resultat för Alan
+participant
+101
+long jump
+Marathon
+teams
+message Inmatning av resultat
+message Resultat för Ada i long jump
+add result
+100
+long jump
+6,4
+message Resultat för Alan i Marathon
+add result
+101
+Marathon
+2,48
+message Resultat för Ada i Marathon
+add result
+100
+Marathon
+2,5
+message Resultat för Alan i long jump
+add result
+101
+long jump
+6,5
+message Resultat för Ada i long jump
+add result
+100
+long jump
+6,93
+message Resultat för Alan i long jump
+add result
+101
+long jump
+6,75
+message Resultat för Alan i long jump
+add result
+101
+long jump
+0,0
+message Resultatlistor: Ada vinner längdhopp, Alan maraton
+message Resultat för Ada
+participant
+100
+message Resultat för Alan
+participant
+101
+long jump
+Marathon
+teams
+reinitialize
+message Sätter upp grenarna (Javelin, 100 meters, Long jump)
+add event
+Javelin
+6
+y
+add event
+100 meters
+1
+no
+add event
+long jump
+3
+yes
+message Lägg till: Ada och Alan från datorhistorien
+add participant
+Ada
+Lovelace
+Computing
+add participant
+Alan
+Turing
+Computing
+message Lägger till resultat för Computer
+message Resultat för Ada i long jump
+add result
+100
+long jump
+4,0
+message Resultat för Ada i 100 meters
+add result
+100
+100 meters
+11,3
+message Resultat för Alan i 100 meters
+add result
+101
+100 meters
+14,0
+message Resultat för Ada i Javelin
+add result
+100
+Javelin
+63,0
+message Resultat för Ada i long jump
+add result
+100
+long jump
+7,0
+message Resultat för samtliga deltagare individuellt
+participant
+101
+participant
+100
+Javelin
+100 meters
+long jump
+teams
+message Lägg till: Arthur, Tricia och William från SF
+add participant
+Arthur
+Dent
+Sf
+add participant
+Tricia
+McMillan
+Sf
+add participant
+William
+Mandela
+Sf
+message Lägg till: Hawkeye, Spearchucker och Duke från MASH
+add participant
+Hawkeye
+Pierce
+MASH
+add participant
+Spearchucker
+Jones
+MASH
+add participant
+Duke
+Forrester
+MASH
+message Lägger till resultat för MASH
+message Resultat för Hawkeye i 100 meters
+add result
+105
+100 meters
+12,4
+message Resultat för Hawkeye i long jump
+add result
+105
+long jump
+4,0
+message Resultat för Spearchucker i long jump
+add result
+106
+long jump
+5,0
+message Resultat för Duke i long jump
+add result
+107
+long jump
+6,0
+message Resultat för Duke i 100 meters
+add result
+107
+100 meters
+16,0
+message Resultat för Duke i Javelin
+add result
+107
+Javelin
+58,0
+add result
+107
+Javelin
+47,0
+message Resultat för Spearchucker i Javelin
+add result
+106
+Javelin
+75,3
+add result
+106
+Javelin
+86,0
+message Resultat för Spearchucker i 100 meters
+add result
+106
+100 meters
+13,0
+message Lägger till resultat för Sf
+message Resultat för Arthur i long jump
+add result
+102
+long jump
+7,0
+add result
+102
+long jump
+3,0
+message Resultat för Tricia i long jump
+add result
+103
+long jump
+7,0
+message Resultat för William i 100 meters
+add result
+104
+100 meters
+15,0
+message Resultat för William i Javelin
+add result
+104
+Javelin
+0,0
+message Resultat för William i Javelin
+add result
+104
+Javelin
+83,5
+message Resultat för William i Javelin
+add result
+104
+Javelin
+52,0
+message Resultat för Arthur i 100 meters
+add result
+102
+100 meters
+15,0
+message Resultat för Tricia i 100 meters
+add result
+103
+100 meters
+12,4
+message Resultat för Arthur i Javelin
+add result
+102
+Javelin
+10,0
+add result
+102
+Javelin
+20,0
+add result
+102
+Javelin
+30,0
+add result
+102
+Javelin
+40,0
+add result
+102
+Javelin
+25,0
+add result
+102
+Javelin
+15,0
+message Resultat för samtliga deltagare individuellt
+participant
+105
+participant
+102
+participant
+101
+participant
+106
+participant
+107
+participant
+104
+participant
+103
+participant
+100
+Javelin
+100 meters
+long jump
+teams
+message Lägger till fler resultat för MASH
+message Resultat för Hawkeye i long jump
+add result
+105
+long jump
+3,2
+long jump
+teams
+message Lägger till fler resultat för Computer
+message Resultat för Ada i long jump
+add result
+100
+long jump
+7,5
+long jump
+teams
+message Resultat för Alan
+participant
+101
+message Resultat för Ada
+participant
+100
+message Resultat för Arthur
+participant
+102
+message Resultat för William
+participant
+104
+message Tar bort alla deltagarna i lag Computer
+remove participant
+100
+remove participant
+101
+message Resultat för samtliga deltagare individuellt
+participant
+105
+participant
+102
+participant
+101
+participant
+106
+participant
+107
+participant
+104
+participant
+103
+participant
+100
+Javelin
+100 meters
+long jump
+teams
