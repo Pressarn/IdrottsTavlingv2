@@ -96,7 +96,7 @@ public class Main {
                     exit();
                     break;
                 default:
-                    System.out.println("Wrong command: " + command);
+                    System.out.println("Unknown command: " + command);
 
             }
         }
@@ -319,7 +319,6 @@ public class Main {
 
     private void resultEvent(String command) {
 
-
         List<TopListPosition> topList = new ArrayList<>();
 
         String event = command;
@@ -485,10 +484,6 @@ public class Main {
     }
 
 
-
-
-
-
     private void resultTeam() {
 
         if (participantArrayList.isEmpty()) {
@@ -517,8 +512,16 @@ public class Main {
                             teamMedals.thirdPlace++;
                         }
                     }
+
                     }
                 }
+            for (Participant participant : this.participantArrayList) {
+                TeamMedals teamMedals = teams.get(participant.getTeamName());
+                if(teamMedals == null) {
+                    teamMedals = new TeamMedals(0, 0, 0);
+                    teams.put(participant.getTeamName(), teamMedals);
+                }
+            }
 
                 List<TeamResult> teamResults = new ArrayList<>();
                 for (Entry<String, TeamMedals> entry : teams.entrySet()) {
@@ -555,6 +558,14 @@ public class Main {
         }
     }
 
+    public void printSign(int ammount, char type){
+        for (int x = 0; x < ammount; x++){
+            System.out.print(type);
+        }
+    }
+
+
+
 
     private void message(String message) {
 
@@ -569,12 +580,14 @@ public class Main {
         String toPad = "#";
         String specialInLine = new String(new char[toPad.length() + 56 - message.length()]).replace('\0', fill) + toPad;
         System.out.println("");
-        System.out.println("############################################################");
+        printSign(60, '#');
+        System.out.println("");
         System.out.println("#                                                          #");
         System.out.print("# " + message.toUpperCase());
         System.out.println(specialInLine);
         System.out.println("#                                                          #");
-        System.out.println("############################################################");
+        printSign(60, '#');
+        System.out.println("");
 
     }
 
@@ -587,13 +600,14 @@ public class Main {
         String toPad = "#";
         String specialInLine = new String(new char[toPad.length() + 57 - message.length()]).replace('\0', fill) + toPad;
         System.out.println("");
-        System.out.println("############################################################");
+        printSign(60, '#');
+        System.out.println("");
         System.out.println("#                                                          #");
         System.out.print("#" + message);
         System.out.println(specialInLine);
         System.out.println("#                                                      	   #");
-        System.out.println("############################################################");
-
+        printSign(60, '#');
+        System.out.println("");
         while (participantArrayList.size() > 0) {
             participantArrayList.clear();
         }

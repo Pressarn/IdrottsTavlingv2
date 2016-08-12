@@ -41,9 +41,11 @@ public class TopListPosition implements Comparable<TopListPosition> {
     public String getName(){
         return name;
     }
+
     public double getScore(){
         return score;
     }
+
     public Event getEvent(){
         return event;
     }
