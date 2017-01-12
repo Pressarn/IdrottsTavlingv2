@@ -16,34 +16,34 @@ public class Main {
     private int id = 99;
 
 
-    public String readString(String prompt) {
+    private String readString(String prompt) {
         System.out.print("> " + prompt);
         return keyboard.nextLine();
     }
 
-    public int readInt(String prompt) {
+    private int readInt(String prompt) {
         System.out.print(prompt);
         int number = keyboard.nextInt();
         keyboard.nextLine();
         return number;
     }
 
-    public double readDouble(String prompt) {
+    private double readDouble(String prompt) {
         System.out.print(prompt);
         double number = keyboard.nextDouble();
         keyboard.nextLine();
         return number;
     }
 
-    public String readCommand() {
+    private String readCommand() {
         return readString("Command: ").toLowerCase();
     }
 
-    public void initiate() {
+    private void initiate() {
         System.out.println("Welcome");
     }
 
-    public void writeMenu() {
+    private void writeMenu() {
         System.out.println("Following commandos are possible:");
         System.out.println(" Add event");
         System.out.println(" Add participant");
@@ -56,7 +56,7 @@ public class Main {
         System.out.println(" Exit");
     }
 
-    public void manageCommand(String command) {
+    private void manageCommand(String command) {
 
         if (command.matches("message.+")) {
             message(command);
@@ -102,7 +102,7 @@ public class Main {
         }
     }
 
-    public void addEvent() {
+    private void addEvent() {
 
         String eventName = "";
         while (eventName.isEmpty() || getEvent(eventName) != null) {
@@ -149,7 +149,7 @@ public class Main {
         System.out.println(e.getEventName() + " has been added.");
     }
 
-    private static String normalizer(String s){
+    private String normalizer(String s){
         s = s.toLowerCase();
         char[] name = s.toCharArray();
         name[0] = ("" + (name[0])).toUpperCase().charAt(0);
@@ -244,8 +244,7 @@ public class Main {
         }
     }
 
-
-    public void addResultEvent(Participant p) {
+    private void addResultEvent(Participant p) {
 
         String enterEventName = readString("Enter event: ");
 
@@ -275,7 +274,6 @@ public class Main {
             System.out.println("To many tries!");
         }
     }
-
 
     private void resultParticipant() {
 
@@ -314,15 +312,11 @@ public class Main {
         }
     }
 
-
-
-
     private void resultEvent(String command) {
 
         List<TopListPosition> topList = new ArrayList<>();
 
-        String event = command;
-        Event e = getEvent(event);
+        Event e = getEvent(command);
         double participantsBestResult;
         String name;
 
@@ -380,6 +374,19 @@ public class Main {
 
     }
 
+    public class ScoreComparator implements Comparator<TopListPosition> {
+        public int compare(TopListPosition t1, TopListPosition t2){
+
+            if (t1.getScore() == t2.getScore())
+                return 0;
+            else if (t1.getScore() > t2.getScore())
+                return 1;
+            else
+                return -1;
+
+        }
+    }
+
     private Integer getPosition(Participant p,  final Event event) {
 
 
@@ -417,11 +424,11 @@ public class Main {
         }
 
         if (event.getBiggerBetter()){
-            Collections.sort(topListForTeams,Collections.reverseOrder(new TopListPosition.scoreComparator()));
+            Collections.sort(topListForTeams,Collections.reverseOrder(new ScoreComparator()));
 
         }
         else if (!event.getBiggerBetter()){
-            Collections.sort(topListForTeams, new TopListPosition.scoreComparator());
+            Collections.sort(topListForTeams, new ScoreComparator());
 
         }
 
@@ -483,7 +490,6 @@ public class Main {
         return null;
     }
 
-
     private void resultTeam() {
 
         if (participantArrayList.isEmpty()) {
@@ -503,13 +509,13 @@ public class Main {
                         }
 
                         if (position == 1) {
-                            teamMedals.firstPlace++;
+                            teamMedals.incrementFirstPlace();
 
                         } else if (position == 2) {
-                            teamMedals.secondPlace++;
+                            teamMedals.incrementSecondPlace();
 
                         } else if (position == 3) {
-                            teamMedals.thirdPlace++;
+                            teamMedals.incrementThirdPlace();
                         }
                     }
 
@@ -529,25 +535,26 @@ public class Main {
                 }
                 Collections.sort(teamResults, new Comparator<TeamResult>() {
                     public int compare(TeamResult obj1, TeamResult obj2) {
-                        if (obj1.teamMedals.firstPlace != obj2.teamMedals.firstPlace) {
-                            return obj2.teamMedals.firstPlace - obj1.teamMedals.firstPlace;
+                        if (obj1.getTeamMedals().getFirstPlace() != obj2.getTeamMedals().getFirstPlace()) {
+                            return obj2.getTeamMedals().getFirstPlace() - obj1.getTeamMedals().getFirstPlace();
                         }
 
-                        if (obj1.teamMedals.secondPlace != obj2.teamMedals.secondPlace) {
-                            return obj2.teamMedals.secondPlace - obj1.teamMedals.secondPlace;
+                        if (obj1.getTeamMedals().getSecondPlace() != obj2.getTeamMedals().getSecondPlace()) {
+                            return obj2.getTeamMedals().getSecondPlace() - obj1.getTeamMedals().getSecondPlace();
                         }
 
-                        return obj2.teamMedals.thirdPlace - obj1.teamMedals.thirdPlace;
-                    }
+                        else{
+                        return obj2.getTeamMedals().getThirdPlace() - obj1.getTeamMedals().getThirdPlace();
+                    }}
                 });
                 System.out.println("");
                 System.out.println("1st    2nd    3rd    Team name");
                 System.out.println("*******************************");
                 for (TeamResult teamResult : teamResults) {
-                    System.out.println(teamResult.teamMedals.firstPlace + "      " +
-                            teamResult.teamMedals.secondPlace + "       " +
-                            teamResult.teamMedals.thirdPlace + "      " +
-                            teamResult.team);
+                    System.out.println(teamResult.getTeamMedals().getFirstPlace() + "      " +
+                            teamResult.getTeamMedals().getSecondPlace() + "       " +
+                            teamResult.getTeamMedals().getThirdPlace() + "      " +
+                            teamResult.getTeam());
 
                 }
                 teamResults.clear();
@@ -558,14 +565,11 @@ public class Main {
         }
     }
 
-    public void printSign(int ammount, char type){
+    private void printSign(int ammount, char type){
         for (int x = 0; x < ammount; x++){
             System.out.print(type);
         }
     }
-
-
-
 
     private void message(String message) {
 

@@ -6,9 +6,9 @@ import java.util.Comparator;
 
 public class TopListPosition implements Comparable<TopListPosition> {
 
-    private final String name;
-    private final double score;
-    private final Event event;
+    private String name;
+    private double score;
+    private Event event;
 
     public TopListPosition(String name, double score, Event event) {
         this.name = name;
@@ -21,7 +21,7 @@ public class TopListPosition implements Comparable<TopListPosition> {
         return 0;
     }
 
-    public static class scoreComparator implements Comparator<TopListPosition> {
+    public class ScoreComparator implements Comparator<TopListPosition> {
         public int compare(TopListPosition t1, TopListPosition t2){
 
             if (t1.score == t2.score)
@@ -49,5 +49,7 @@ public class TopListPosition implements Comparable<TopListPosition> {
     public Event getEvent(){
         return event;
     }
+
+
 
 }

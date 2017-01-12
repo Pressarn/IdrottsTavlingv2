@@ -5,11 +5,18 @@
 
 public class TeamResult {
 
-    protected final TeamMedals teamMedals;
-    protected final String team;
+    private TeamMedals teamMedals;
+    private String team;
 
     public TeamResult(TeamMedals teamMedals, String team) {
         this.teamMedals = teamMedals;
         this.team = team;
+    }
+    public TeamMedals getTeamMedals(){
+        return teamMedals;
+    }
+
+    public String getTeam(){
+        return team;
     }
 }

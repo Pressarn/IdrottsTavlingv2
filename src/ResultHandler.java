@@ -1,3 +1,7 @@
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 /**
  * Created by SimonSchwieler on 2016-04-07.
  */
@@ -31,5 +35,6 @@ public class ResultHandler {
     public String toString(){
         return "   ---" + result.getResult() + " " + event.getEventName() + " " +  participant.getFirstName() + " " + participant.getLastName();
     }
+
 }
 
